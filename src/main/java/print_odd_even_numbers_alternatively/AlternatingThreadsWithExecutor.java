@@ -4,19 +4,15 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class AlternatingThreadsWithExecutor {
-
     private static final Object lock = new Object();
-    private static boolean isOddTurn = true; // Start with odd numbers
+    private static boolean isOddTurn = true;
 
     public static void main(String[] args) {
-        ExecutorService executor = Executors.newFixedThreadPool(2); // Create a thread pool with 2 threads
-
+        ExecutorService executor = Executors.newFixedThreadPool(2);
         Runnable oddTask = new NumberPrinter(true); // Odd numbers
         Runnable evenTask = new NumberPrinter(false); // Even numbers
-
         executor.submit(oddTask);
         executor.submit(evenTask);
-
         executor.shutdown(); // Initiate an orderly shutdown of the executor
     }
 
